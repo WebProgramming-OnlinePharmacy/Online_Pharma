@@ -1,0 +1,15 @@
+{
+    "name": "chala/front",
+    "autoload": {
+        "psr-4": {
+            "Chala\\Front\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "chalaa",
+            "email": "chalaolanigeleta@gmail.com"
+        }
+    ],
+    "require": {}
+}
