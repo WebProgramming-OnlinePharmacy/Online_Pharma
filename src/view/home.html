@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Pharmacy</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&display=swap" rel="stylesheet">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../assets/overlayScrollbars/css/OverlayScrollbars.min.css" />
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css" />
+
+  </head>
+  <body class="hold-transition  layout-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+    
+        <nav class="navbar navbar-expand navbar-primary navbar-dark pt-3 pb-2 fixed-top">
+            <!-- Left navbar links -->
+            <div class="form-inline">
+                <form action="">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="text" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                          <button class="btn btn-sidebar">
+                            <i class="fas fa-search fa-fw"></i>
+                          </button>
+                        </div>
+                      </div>
+                </form>
+                
+              </div>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-none d-sm-inline-block pr-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
+                        chat
+                    </button>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block pr-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
+                        profile
+                    </button>
+                </li>       
+            </ul>
+        </nav>
+        <aside class="main-sidebar pt-5">
+            <div class="sidebar pt-5">
+                <form>
+                    <h5>Price</h5>
+                    <div class="form-check ml-3">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">0 Birr - 10 Birr</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">10 Birr - 50 Birr</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">50 Birr - 100 Birr</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">100 Birr - 500 Birr</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">above 500</label>
+                    </div>
+                    <h5>Strength</h5>
+                    <div class="form-check ml-3">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">5 - 100 mg</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1"> 500 - 1,000 mg</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">500 - 1,000 mg</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">1,000+ mg </label>
+                    </div>
+                    <h5>Form</h5>
+                    <div class="form-check ml-3">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </aside>
+        <div class="content-wrapper pt-5">
+            <div class="content pt-5">
+                <div class="container-fluid">
+                  <!-- Small boxes (Stat box) -->
+                  <div class="row">
+                      <div class="col-lg-3 col-md-6 col-sm-12">
+                          <div class="card">
+                              <img src="../assets/dist/img/images (1).jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12">
+                          <div class="card">
+                              <img src="../assets/dist/img/images (2).jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12">
+                          <div class="card">
+                              <img src="../assets/dist/img/images (3).jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12">
+                          <div class="card">
+                              <img src="../assets/dist/img/images (4).jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12">
+                          <div class="card">
+                              <img src="../assets/dist/img/images.jpeg" class="card-img-top" alt="...">
+                              <div class="card-body">
+                              <h5 class="card-title">Card title</h5>
+                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                              <a href="#" class="btn btn-primary">Go somewhere</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- /.content -->
+            </div>
+        </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../assets/dist/js/adminlte.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="../assets/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  </body>
+</html>
