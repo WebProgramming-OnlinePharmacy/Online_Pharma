@@ -9,7 +9,7 @@ class Account extends Database
 
 
     // register account
-    function register($uname, $mail, $pass, $rol)
+    public function register($uname, $mail, $pass, $rol)
     {
         $username = $this->myencode($uname);
         $email = $this->myencode($mail);
@@ -20,13 +20,17 @@ class Account extends Database
             $is_pharmacy = 0;
             $is_admin = 0;
             $is_deleted = 0;
+            $is_approved = 1;
         } elseif ($role == "pharmacy") {
             $is_user = 0;
             $is_pharmacy = 1;
             $is_admin = 0;
             $is_deleted = 0;
+            $is_approved = 0;
         }
-        $sql = "INSERT INTO `account` (`id`, `username`, `email`, `pasword`, `is_user`, `is_pharmacy`, `is_admin`, `is_deleted`) VALUES (NULL, '$username', '$email', '$password', '$is_user', '$is_pharmacy', '$is_admin', '$is_deleted')";
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO `account` (`id`, `username`, `email`, `pasword`, `is_user`, `is_pharmacy`, `is_admin`,`is_approved`, `is_deleted`,`created_at`, `updated_at`) VALUES (NULL, '$username', '$email', '$password', '$is_user', '$is_pharmacy', '$is_admin','$is_approved', '$is_deleted','$created_at','$updated_at')";
         $sql1 = "SELECT * FROM account WHERE email= '$email'";
         $sql2 = "SELECT * FROM account WHERE username= '$username'";
 
@@ -45,5 +49,51 @@ class Account extends Database
         } else {
             echo "<script>alert('usernameErr')</script>";
         }
+    }
+
+    public function login($username, $password)
+    {
+        $username = $this->myencode($username);
+        $password = md5($this->myencode($password));
+        $sql = "SELECT * FROM account WHERE username='$username' AND pasword='$password' And is_deleted=0";
+        $query = mysqli_query($this->connect(), $sql);
+        if (mysqli_num_rows($query) > 0) {
+            $row = mysqli_fetch_assoc($query);
+            $accid = $row['id'];
+            $accname = $row['username'];
+            $is_approved = $row['is_approved'];
+            if ($row['is_user'] == 1) {
+                $role = "user";
+            } elseif ($row['is_pharmacy'] == 1) {
+                $role = "pharmacy";
+            } else {
+                $role = "admin";
+            }
+            $_SESSION['accid'] = $accid;
+            $_SESSION['username'] = $accname;
+            $_SESSION['role'] = $role;
+            $_SESSION['is_approved'] = $is_approved;
+            // 
+            if ($_SESSION['role'] == "pharmacy") {
+                if ($is_approved) {
+                    $sql2 = "SELECT * FROM pharmacy_info WHERE acc_id= $accid";
+                    $row = mysqli_fetch_array(mysqli_query($this->connect(), $sql2));
+                    $pharmacy_id = $row['id'];
+                    $pharmacy_name = $row['Pharmacy_Name'];
+                    $_SESSION['pharmacy_id'] = $pharmacy_id;
+                    $_session['pharacy_name'] = $pharmacy_name;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function logout()
+    {
+        session_destroy();
+        header('Location: ./index.php');
     }
 }

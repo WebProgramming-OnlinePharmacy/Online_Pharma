@@ -9,13 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&display=swap" rel="stylesheet">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="../assets//dist//css//adminlte.min.css" />
-
+    <link rel="stylesheet" href="./assets/dist/css/adminlte.min.css" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../assets//overlayScrollbars//css//OverlayScrollbars.min.css" />
-    <link rel="stylesheet" href="assets/overlayScrollbars/css/OverlayScrollbars.min.css" />
+    <link rel="stylesheet" href="./assets/overlayScrollbars/css/OverlayScrollbars.min.css" />
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css" />
 

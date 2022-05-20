@@ -16,7 +16,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="admin.php?approvePharmacy" class="nav-link ">
                             <p>Approve Pharmacy</p>
                         </a>
                     </li>
@@ -37,6 +37,14 @@
                     <i class="fas fa-edit"></i>
                     <p>
                         Update Account
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-edit"></i>
+                    <p>
+                        Add Admin
                     </p>
                 </a>
             </li>

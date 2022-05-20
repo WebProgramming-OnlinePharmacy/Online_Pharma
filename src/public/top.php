@@ -16,14 +16,10 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block pr-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signin">
-                Signin
-            </button>
+            <a href="./login.php" class="nav-link">Signin</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block pr-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup">
-                SignUp
-            </button>
+            <a href="./register.php" class="nav-link">Signup</a>
         </li>
     </ul>
 </nav>
@@ -91,9 +87,9 @@
                 <div class="card ">
                     <div class="card-body">
                         <p class="login-box-msg">Login to CSEC_ASTU</p>
-                        <form action="#" method="post">
+                        <form method="post">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Username or Email">
+                                <input type="text" class="form-control" name="username" placeholder="Username or Email">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-envelope"></span>
@@ -101,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
@@ -112,7 +108,7 @@
                                 <div class="col-8">
                                 </div>
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                    <button type="submit" name="login" class="btn btn-primary btn-block">Login</button>
                                 </div>
                             </div>
                         </form>
