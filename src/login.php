@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
             header('Location: ./admin.php');
         }
     } else {
-        header("Locaton: ./index.php");
+        $err = "incorrect username or password";
     }
 }
 
@@ -32,12 +32,12 @@ if (isset($_POST['login'])) {
         </div>
         <!-- /.login-logo -->
         <div class="card">
+
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
                 <form method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        <input type="text" class="form-control <?php if (isset($err)) echo 'is-invalid'; ?>" name="username" placeholder="Username" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
+                        <input type="password" class="form-control <?php if (isset($err)) echo 'is-invalid'; ?>" name="password" placeholder="Enter your password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

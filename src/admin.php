@@ -15,8 +15,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
 if (isset($_GET['logout'])) {
     $acc->logout();
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,11 +26,34 @@ if (isset($_GET['logout'])) {
         <?php
         include './includes/admintop.php';
         include './includes/adminleft.php';
-        if (isset($_GET['approvePharmacy'])) {
-            include './view/approvepharmacy.php';
-        }
-        if (isset($_GET['viewPharmacydetail'])) {
-            include './view/pharmacydetail.php';
+        if (
+            isset($_GET['registeredPharmacylist']) || isset($_GET['viewPharmacydetail'])
+            || isset($_GET['addadmin']) || isset($_GET['viewpharmacy']) || isset($_GET['deletepharmacy'])
+            || isset($_GET['deletedpharmacylist'])
+        ) {
+            if (isset($_GET['registeredPharmacylist'])) {
+                include './view/registeredPharmacylist.php';
+            }
+            if (isset($_GET['viewPharmacydetail'])) {
+                include './view/pharmacydetail.php';
+            }
+            if (isset($_GET['addadmin'])) {
+                include './view/addadmin.php';
+            }
+            if (isset($_GET['viewpharmacy'])) {
+                include './view/pharmacylist.php';
+            }
+            if (isset($_GET['deletedpharmacylist'])) {
+                include './view/deletedpharmacylist.php';
+            }
+            if (isset($_GET['deletepharmacy'])) {
+                if ($admin->deletepharmacy()) {
+                    echo "<script>alert('Deleted successfully')</script>";
+                    echo "<script>window.location.replace('./admin.php?viewpharmacy')</script>";
+                } else {
+                    echo "<script>alert('some thing went wrong')</script>";
+                }
+            }
         } else {
             include './includes/adminbody.php';
         }
@@ -42,3 +63,13 @@ if (isset($_GET['logout'])) {
     include './includes/script.php';
     ?>
 </body>
+
+<?php
+if (isset($_POST['approvenewpharmacy'])) {
+    if ($admin->approvePharmacy($row['acc_id'])) {
+        echo "<script>alert('Approved successfully')</script>";
+        echo "<script>window.location.replace('./admin.php?registeredPharmacylist')</script>";
+    } else {
+        echo "<script>alert('some thing went wrong')</script>";
+    }
+} ?>

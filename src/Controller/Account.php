@@ -85,9 +85,8 @@ class Account extends Database
                 }
             }
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 
