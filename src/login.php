@@ -36,6 +36,7 @@ if (isset($_POST['login'])) {
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form method="post">
+                    
                     <div class="input-group mb-3">
                         <input type="text" class="form-control <?php if (isset($err)) echo 'is-invalid'; ?>" name="username" placeholder="Username" required>
                         <div class="input-group-append">

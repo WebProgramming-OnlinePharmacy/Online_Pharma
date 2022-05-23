@@ -103,4 +103,51 @@ class Admin extends Database
         }
         return false;
     }
+
+    function addAdmin($username, $email, $password, $fName, $mName, $lName, $age, $sex, $phone)
+    {
+        $username = $this->myencode($username);
+        $email = $this->myencode($email);
+        $fName = $this->myencode($fName);
+        $lName = $this->myencode($lName);
+        $mName = $this->myencode($mName);
+        $age = $this->myencode($age);
+        $sex = $this->myencode($sex);
+        $phone = $this->myencode($phone);
+        $password = md5($this->myencode($password));
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+        $is_user = 0;
+        $is_admin = 1;
+        $is_approved = 1;
+        $is_pharmacy = 0;
+        $is_deleted = 0;
+        $sql = "INSERT INTO `account`(`username`, `email`, `pasword`, `is_user`, `is_pharmacy`, `is_admin`, `is_approved`, `is_deleted`, `created_at`, `updated_at`) 
+        VALUES ('$username', '$email', '$password', '$is_user', '$is_pharmacy', '$is_admin', '$is_approved','$is_deleted','$created_at','$updated_at') ";
+        $sql1 = "SELECT * FROM account WHERE email= '$email'";
+        $sql2 = "SELECT * FROM account WHERE username= '$username'";
+        if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
+            if (mysqli_num_rows(mysqli_query($this->connect(), $sql2)) == 0) {
+                if (mysqli_query($this->connect(), $sql)) {
+                    $sql3 = "SELECT * FROM `account` ORDER BY `id` DESC LIMIT 1;";
+                    $query = mysqli_query($this->connect(), $sql3);
+                    if ($row = mysqli_fetch_assoc($query)) {
+                        $accid = $row['id'];
+                        $created_at = date('Y-m-d H:i:s');
+                        $updated_at = date('Y-m-d H:i:s');
+                        $sql4 = "INSERT INTO `admin`(`acc_id`, `F_name`, `M_name`, `L_name`, `age`, `sex`, `Phone`, `Created_at`, `Updated_at`) 
+                        VALUES ('$accid','$fName','$mName','$lName','$age','$sex','$phone','$created_at','$updated_at')";
+                        if (mysqli_query($this->connect(), $sql4)) {
+                            return 1;
+                        }
+                        return 2;
+                    }
+                    return 3;
+                }
+                return 4;
+            }
+            return 5;
+        }
+        return 6;
+    }
 }

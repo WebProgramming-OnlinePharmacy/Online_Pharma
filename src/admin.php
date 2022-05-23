@@ -15,6 +15,48 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
 if (isset($_GET['logout'])) {
     $acc->logout();
 }
+if (isset($_POST['addnewadmin'])) {
+    $username = $_POST['username'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $middle_name = $_POST['middle_name'];
+    $age = $_POST['age'];
+    $sex = $_POST['sex'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    if ($password === $confirm_password) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $result = $admin->addAdmin($username, $email, $password, $first_name, $middle_name, $last_name, $age, $sex, $phone);
+            if ($result == 1) {
+                echo "<script>alert('Admin Added successfully')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            } elseif ($result == 2) {
+                echo "<script>alert('some thing went wrong 2')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            } elseif ($result == 3) {
+                echo "<script>alert('some thing went wrong 3')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            } elseif ($result == 4) {
+                echo "<script>alert('some thing went wrong 4')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            } elseif ($result == 5) {
+                $email_err = "invalid email address";
+            } elseif ($result == 6) {
+                $username_err = "invalid username";
+            } else {
+                echo "<script>alert('some thing went wrong')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            }
+        } else {
+            $email_err = "invalid email address";
+        }
+    } else {
+        $password_err = "password confirmation";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,4 +114,6 @@ if (isset($_POST['approvenewpharmacy'])) {
     } else {
         echo "<script>alert('some thing went wrong')</script>";
     }
-} ?>
+}
+
+?>
