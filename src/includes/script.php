@@ -8,3 +8,5 @@
 <script src="./assets//overlayScrollbars//js//jquery.overlayScrollbars.min.js"></script>
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<!-- bs-custome-file-input -->
+<script src="./assets/bs-custom-file-input//bs-custom-file-input.min.js"></script>

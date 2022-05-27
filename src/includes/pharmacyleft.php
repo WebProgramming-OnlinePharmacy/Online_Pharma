@@ -15,18 +15,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="pharmacy.php?addDrug" class="nav-link active">
                             <p>Add Drug</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="pharmacy.php?viewDrug" class="nav-link">
                             <p>View Drug</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <p>Expierd Drug</p>
                         </a>
                     </li>
                 </ul>

@@ -35,4 +35,68 @@ class Pharmacy extends Database
         $row = mysqli_fetch_array(mysqli_query($this->connect(), $sql));
         return $row;
     }
+    function addDrug($name, $manufacture_date, $expied_date, $strength, $form, $price, $quantity, $description, $images)
+    {
+        $name = $this->myencode($name);
+        $manufacture_date = $this->myencode($manufacture_date);
+        $expied_date = $this->myencode($expied_date);
+        $strength = $this->myencode($strength);
+        $form = $this->myencode($form);
+        $price = $this->myencode($price);
+        $quantity = $this->myencode($quantity);
+        $description = $this->myencode($description);
+        $pharmacy_id = $_SESSION['pharmacy_id'];
+        $images = $this->images;
+        if ($quantity > 0) {
+            $is_avilable = 1;
+        } else {
+            $is_avilable = 0;
+        }
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO `drug_info`( `pharmacy_id`, `name`, `description`, `expire_date`, `manufacture_date`, `form`, `strength`, `price`, `quantity`, `is_avilable`, `Created_at`, `Updated_at`) 
+        VALUES ('$pharmacy_id', '$name', '$description', '$expied_date', '$manufacture_date', '$form', '$strength', '$price', '$quantity', '$is_avilable','$created_at', '$updated_at')";
+        if (mysqli_query($this->connect(), $sql)) {
+            $sql2 = "SELECT * FROM `drug_info`  ORDER BY `id` DESC LIMIT 1;";
+            $query = mysqli_query($this->connect(), $sql2);
+            if ($row = mysqli_fetch_assoc($query)) {
+                $id = $row['id'];
+                $created_at = date('Y-m-d H:i:s');
+                $updated_at = date('Y-m-d H:i:s');
+                foreach ($images as $image) {
+                }
+            }
+        }
+    }
+    function viewDrug()
+    {
+        $pharmacy_id = $_SESSION['pharmacy_id'];
+        $sql = "SELECT * FROM `drug_info` WHERE pharmacy_id= $pharmacy_id";
+        $result = mysqli_query($this->connect(), $sql);
+        while ($row = mysqli_fetch_array($result)) {
+            $id = $row['id'];
+            $name = $row['name'];
+            $manufacture_date = $row['manufacture_date'];
+            $expied_date = $row['expire_date'];
+            $form = $row['form'];
+            $strength = $row['strength'];
+            $price = $row['price'];
+            $quantity = $row['quantity'];
+            $is_avilable = $row['is_avilable'];
+            $has_id = base64_encode($id);
+            echo "
+            <tr>
+                <td>" . $id . "</td>
+                <td>" . $name . "</td>
+                <td>" . $manufacture_date . "</td>
+                <td>" . $expied_date . "</td> 
+                <td>" . $form . "</td>
+                <td>" . $strength . "</td>
+                <td>" . $price . "</td>>
+                <td>" . $quantity . "</td>
+                <td>" . $is_avilable . "</td>
+                <td> <a href='admin.php?viewDrugdetail=" . $has_id . "' class='btn btn-primary btn-sm'>view detail</a></td>    
+           </tr>";
+        }
+    }
 }

@@ -29,7 +29,7 @@ class Admin extends Database
 
     function viewpharmacy()
     {
-        $sql = "SELECT account.username,account.email, pharmacy_info.id,pharmacy_info.acc_id, pharmacy_info.Pharmacy_Name,pharmacy_info.Loocation,pharmacy_info.phone FROM account INNER JOIN pharmacy_info ON account.id=pharmacy_info.acc_id WHERE account.is_deleted=0 AND pharmacy_info.is_deleted=0";
+        $sql = "SELECT account.username,account.email, pharmacy_info.id,pharmacy_info.acc_id, pharmacy_info.Pharmacy_Name,pharmacy_info.Loocation,pharmacy_info.phone FROM account INNER JOIN pharmacy_info ON account.id=pharmacy_info.acc_id WHERE account.is_deleted=0 AND pharmacy_info.is_deleted=0 AND account.is_approved=1";
         $result = mysqli_query($this->connect(), $sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];

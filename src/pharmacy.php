@@ -36,15 +36,31 @@ if (isset($_POST['addpharmacyinfo'])) {
             include './includes/pharmacytopregistration.php';
             include './includes/pharmacyleftRegister.php';
         }
-        if (isset($_GET['addpharmacyinfo'])) {
-            include './view/addpharmacyInfo.php';
+        if (isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug']) || isset($_GET['expiredDrug'])) {
+            if (isset($_GET['addpharmacyinfo'])) {
+                include './view/addpharmacyInfo.php';
+            }
+            if (isset($_GET['addDrug'])) {
+                include './view/addDrug.php';
+            }
+            if (isset($_GET['viewDrug'])) {
+                include './view/viewDrug.php';
+            }
+            if (isset($_GET['expiredDrug'])) {
+                include './view/expiredDrug.php';
+            }
         } else {
             include './includes/pharmacybody.php';
         }
         ?>
     </div>
     <?php
-    include './includes/script.php';
+    include './includes/script.php'
     ?>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 </body>
 <?php
