@@ -20,6 +20,7 @@ if (isset($_POST['addpharmacyinfo'])) {
     $phone = $_POST['Phonenumber'];
     $location = $_POST['location'];
     $pharma->register($pharmacyname, $location, $phone);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -35,7 +36,8 @@ if (isset($_POST['addpharmacyinfo'])) {
             include './includes/pharmacytop.php';
         } else {
             include './includes/pharmacytopregistration.php';
-            include './includes/pharmacyleftRegister.php';
+            include './view/wait-until-approve.php';
+            //include './includes/pharmacyleftRegister.php';
         }
         if (isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug']) || isset($_GET['expiredDrug'])) {
             if (isset($_GET['addpharmacyinfo'])) {
