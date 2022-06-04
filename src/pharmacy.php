@@ -20,7 +20,6 @@ if (isset($_POST['addpharmacyinfo'])) {
     $phone = $_POST['Phonenumber'];
     $location = $_POST['location'];
     $pharma->register($pharmacyname, $location, $phone);
-    
 }
 ?>
 <!DOCTYPE html>
@@ -31,13 +30,16 @@ if (isset($_POST['addpharmacyinfo'])) {
 <body class="hold-transition  layout-fixed ">
     <div class="wrapper">
         <?php
+        
         if ($_SESSION['is_approved']) {
             include './includes/pharmacyleft.php';
             include './includes/pharmacytop.php';
-        } else {
+        } else if( $pharma->checkApprove($_SESSION['accid'])) {
             include './includes/pharmacytopregistration.php';
-            include './view/wait-until-approve.php';
-            //include './includes/pharmacyleftRegister.php';
+           include './includes/wait-until-approve.php';
+        }else{
+            include './includes/pharmacytopregistration.php';
+            include './includes/pharmacyleftRegister.php';
         }
         if (isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug']) || isset($_GET['expiredDrug'])) {
             if (isset($_GET['addpharmacyinfo'])) {
@@ -52,7 +54,8 @@ if (isset($_POST['addpharmacyinfo'])) {
             if (isset($_GET['expiredDrug'])) {
                 include './view/expiredDrug.php';
             }
-        } else {
+        } 
+        else {
             include './includes/pharmacybody.php';
         }
         ?>

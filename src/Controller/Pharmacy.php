@@ -19,7 +19,6 @@ class Pharmacy extends Database
         if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
             if (mysqli_query($this->connect(), $sql)) {
                 echo "<script>alert('Added successfully')</script>";
-                echo "<script>window.open('../src/index.php')</script>";
                 return true;
             } else {
                 echo mysqli_error($this->connect(),$sql);
@@ -101,4 +100,14 @@ class Pharmacy extends Database
            </tr>";
         }
     }
+    function checkApprove($id){
+        $sql2 = "SELECT * FROM `pharmacy_info` WHERE acc_id = $id";
+        $result2 = mysqli_query($this->connect(), $sql2);
+        if(mysqli_num_rows($result2)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
