@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__ . './vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use App\Controller\Account;
 use App\Controller\Admin;

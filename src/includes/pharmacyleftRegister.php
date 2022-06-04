@@ -13,14 +13,6 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link active">
-                    <i class="fas fa-edit"></i>
-                    <p>
-                        Update Account
-                    </p>
-                </a>
-            </li>
         </ul>
     </div>
 </aside>
