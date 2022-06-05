@@ -1,11 +1,6 @@
 <?php
 session_start();
-<<<<<<< HEAD
-=======
-var_dump(__DIR__);
->>>>>>> 6bf475cd67485313515e623e8b74737c559ea2e8
 require __DIR__ . '/vendor/autoload.php';
-
 use App\Controller\Account;
 use App\Controller\Pharmacy;
 use App\Controller\Admin;
@@ -60,10 +55,13 @@ if (isset($_POST['addDrug'])) {
         }
         if (
             isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug'])
-            || isset($_GET['expiredDrug']) || isset($_GET['viewDrugdetail'])
+            || isset($_GET['expiredDrug']) || isset($_GET['viewDrugdetail']) || isset($_GET['update-account-pharma'])
         ) {
             if (isset($_GET['addpharmacyinfo'])) {
                 include './view/addpharmacyInfo.php';
+            }
+            if (isset($_GET['update-account-pharma'])) {
+                include './view/update-account.php';
             }
             if (isset($_GET['addDrug'])) {
                 include './view/addDrug.php';
@@ -74,15 +72,10 @@ if (isset($_POST['addDrug'])) {
             if (isset($_GET['expiredDrug'])) {
                 include './view/expiredDrug.php';
             }
-<<<<<<< HEAD
             if (isset($_GET['viewDrugdetail'])) {
                 include './view/viewDrugdetail.php';
             }
         } else {
-=======
-        } 
-        else {
->>>>>>> 6bf475cd67485313515e623e8b74737c559ea2e8
             include './includes/pharmacybody.php';
         }
         ?>

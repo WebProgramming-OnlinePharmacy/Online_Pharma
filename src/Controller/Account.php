@@ -88,7 +88,32 @@ class Account extends Database
         }
         return false;
     }
-
+    
+    function accountInfo($id)
+    {
+        $sql = "SELECT * FROM account WHERE id=$id";
+        $result = mysqli_query($this->connect(), $sql);
+        if($result){
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+    }
+    function updateAccount($username, $email, $password)
+    {
+        $username = $this->myencode($username);
+        $email = $this->myencode($email);
+        $password = md5($this->myencode($password));
+        $date = date('Y-m-d H:i:s');
+        $sql = "UPDATE `account` SET `username`='$username',`email`='$email',`pasword`='$password', `updated_at`= '$date' WHERE id=".$_SESSION['accid'];
+        if (mysqli_query($this->connect(), $sql)) {
+            echo "<script>alert('Updated successfully')</script>";
+           
+            return true;
+        }else{
+            echo "<script>alert('UpdateErr')</script>";
+            return false;
+        } 
+    }
 
     public function logout()
     {
