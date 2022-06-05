@@ -1,12 +1,14 @@
 <?php
 session_start();
-require __DIR__ . './vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use App\Controller\Account;
 use App\Controller\Pharmacy;
+use App\Controller\Admin;
 
 $acc = new Account;
 $pharma = new Pharmacy;
+$admin = new Admin;
 if (!isset($_SESSION['role']) || $_SESSION['role'] != "pharmacy") {
     header("Location: ../index.php");
 }
@@ -19,6 +21,18 @@ if (isset($_POST['addpharmacyinfo'])) {
     $phone = $_POST['Phonenumber'];
     $location = $_POST['location'];
     $pharma->register($pharmacyname, $location, $phone);
+}
+if (isset($_POST['addDrug'])) {
+    $drug_name = $_POST['drug_name'];
+    $manfacture_date = $_POST['manfacture_date'];
+    $expire_date = $_POST['expire_date'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $strength = $_POST['strength'];
+    $form = $_POST['form'];
+    $description = $_POST['description'];
+    $files = $_FILES['image'];
+    $pharma->addDrug($drug_name, $manfacture_date, $expire_date, $strength, $form, $price, $quantity, $description, $files);
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +50,10 @@ if (isset($_POST['addpharmacyinfo'])) {
             include './includes/pharmacytopregistration.php';
             include './includes/pharmacyleftRegister.php';
         }
-        if (isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug']) || isset($_GET['expiredDrug'])) {
+        if (
+            isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug'])
+            || isset($_GET['expiredDrug']) || isset($_GET['viewDrugdetail'])
+        ) {
             if (isset($_GET['addpharmacyinfo'])) {
                 include './view/addpharmacyInfo.php';
             }
@@ -48,6 +65,9 @@ if (isset($_POST['addpharmacyinfo'])) {
             }
             if (isset($_GET['expiredDrug'])) {
                 include './view/expiredDrug.php';
+            }
+            if (isset($_GET['viewDrugdetail'])) {
+                include './view/viewDrugdetail.php';
             }
         } else {
             include './includes/pharmacybody.php';

@@ -42,14 +42,14 @@ class Admin extends Database
             $hashacc_id = base64_encode($accid);
             echo " 
             <tr>
-             <td>" . $id . "</td>
-             <td>" . $accid . "</td>
-              <td>" . $pharmacy_name . "</td>
-              <td>" . $location . "</td>
-              <td>" . $username . "</td>
-              <td>" . $phone . "</td>
-              <td>" . $email . "</td> 
-              <td> <a href='admin.php?deletepharmacy=" . $hashacc_id . "' class='btn btn-danger btn-sm'>Delete</a></td>    
+             <td> $id </td>
+             <td> $accid </td>
+              <td> $pharmacy_name </td>
+              <td> $location </td>
+              <td>$username</td>
+              <td>$phone</td>
+              <td>$email</td> 
+              <td> <a href='admin.php?deletepharmacy=$hashacc_id' class='btn btn-danger btn-sm'>Delete</a></td>    
             </tr>";
         }
     }

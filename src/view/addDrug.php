@@ -4,24 +4,24 @@
         <div class="container-fluid pt-5">
             <div class="card card-default mt-5">
                 <div class="card-body ">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Drug Name</label>
-                                    <input type="text" name="drug_name" class="form-control" placeholder="First Name" required>
+                                    <input type="text" name="drug_name" class="form-control" placeholder="First Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Manufacture Date</label>
-                                    <input type="date" name="maufacture_date" class="form-control" placeholder="Last Name" required>
+                                    <input type="date" name="manfacture_date" class="form-control" placeholder="Last Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Expire Date</label>
-                                    <input type="date" name="expire_date" class="form-control" placeholder="Last Name" required>
+                                    <input type="date" name="expire_date" class="form-control" placeholder="Last Name">
                                 </div>
                                 <div class="form-group">
                                     <label>strength</label>
-                                    <input type="number" name="strength" class="form-control" placeholder="Age" required>
+                                    <input type="number" name="strength" class="form-control" placeholder="Age">
                                 </div>
                                 <div class="form-group">
                                     <label>Form</label>
@@ -35,11 +35,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="number" name="price" class="form-control <?php if (isset($username_err)) echo 'is-invalid'; ?>" placeholder="Username" required>
+                                    <input type="number" name="price" class="form-control <?php if (isset($username_err)) echo 'is-invalid'; ?>" placeholder="Username">
                                 </div>
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control <?php if (isset($email_err)) echo 'is-invalid'; ?>" placeholder="Email" required>
+                                    <input type="number" name="quantity" class="form-control <?php if (isset($email_err)) echo 'is-invalid'; ?>" placeholder="quantitiy">
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
@@ -49,7 +49,7 @@
                                     <label for="exampleInputFile">Images</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile" multiple>
+                                            <input type="file" name="image[]" class="custom-file-input" multiple>
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                         <!-- /.col -->
                 </div>
                 <div class="display-flex">
-                    <button name="addnewadmin" type="submit" class="btn btn-primary  btn-md float-right">Add</button>
+                    <button name="addDrug" type="submit" class="btn btn-primary mb-3 mr-3 btn-md float-right">Add</button>
                 </div>
                 </form> <!-- /.row -->
             </div>

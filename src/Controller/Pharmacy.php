@@ -35,6 +35,57 @@ class Pharmacy extends Database
         $row = mysqli_fetch_array(mysqli_query($this->connect(), $sql));
         return $row;
     }
+    function addImage($id, $image_url)
+    {
+        $id = $this->myencode($id);
+        $imageurl = $this->myencode($image_url);
+        $created_at = date('Y-m-d H:i:s');
+        $updated_at = date('Y-m-d H:i:s');
+        $sql3 = "INSERT INTO `drug_img`(`drug_id`, `image_url`, `Created_at`, `Updated_at`) 
+                VALUES ('$id','$image_url','$created_at','$updated_at')";
+        if (mysqli_query($this->connect(), $sql3)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function imageupload($files, $id)
+    {
+        foreach ($files['name'] as $key => $file) {
+            $file_name = $files['name'][$key];
+            $file_tmp = $files['tmp_name'][$key];
+            $file_size = $files['size'][$key];
+            $file_error = $files['error'][$key];
+            $file_type = $files['type'][$key];
+            $file_ext = explode('.', $file_name);
+            $file_ext = strtolower(end($file_ext));
+            $allowed = array('jpg', 'jpeg', 'png');
+            if (in_array($file_ext, $allowed)) {
+                if ($file_error === 0) {
+                    if ($file_size <= 2097152) {
+                        $file_name_new = time() . '_' . uniqid('', true) . '.' . $file_ext;
+                        $file_destination = 'images/' . $file_name_new;
+                        move_uploaded_file($file_tmp, $file_destination);
+                        if ($this->addImage($id, $file_destination)) {
+                            $error = 0;
+                        } else {
+                            $error = 1;
+                        }
+                    } else {
+                        $error = 2;
+                    }
+                } else {
+                    $error = 3;
+                }
+            } else {
+                $error = 4;
+            }
+            if ($error != 0) {
+                return $error;
+            }
+        }
+        return $error;
+    }
     function addDrug($name, $manufacture_date, $expied_date, $strength, $form, $price, $quantity, $description, $images)
     {
         $name = $this->myencode($name);
@@ -46,7 +97,6 @@ class Pharmacy extends Database
         $quantity = $this->myencode($quantity);
         $description = $this->myencode($description);
         $pharmacy_id = $_SESSION['pharmacy_id'];
-        $images = $this->images;
         if ($quantity > 0) {
             $is_avilable = 1;
         } else {
@@ -61,9 +111,21 @@ class Pharmacy extends Database
             $query = mysqli_query($this->connect(), $sql2);
             if ($row = mysqli_fetch_assoc($query)) {
                 $id = $row['id'];
-                $created_at = date('Y-m-d H:i:s');
-                $updated_at = date('Y-m-d H:i:s');
-                foreach ($images as $image) {
+                if ($this->imageupload($images, $id) == 0) {
+                    echo "<script>alert('Added successfully')</script>";
+                    echo "<script>window.open('../src/pharmacy.php')</script>";
+                } elseif ($this->imageupload($images, $id) == 1) {
+                    echo "<script>alert('error in uploading')</script>";
+                    echo "<script>window.open('../src/pharmacy.php')</script>";
+                } elseif ($this->imageupload($images, $id) == 2) {
+                    echo "<script>alert('file size is too big')</script>";
+                    echo "<script>window.open('../src/pharmacy.php')</script>";
+                } elseif ($this->imageupload($images, $id) == 3) {
+                    echo "<script>alert('error in uploading')</script>";
+                    echo "<script>window.open('../src/pharmacy.php')</script>";
+                } elseif ($this->imageupload($images, $id) == 4) {
+                    echo "<script>alert('file type is not allowed')</script>";
+                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 }
             }
         }
@@ -84,19 +146,43 @@ class Pharmacy extends Database
             $quantity = $row['quantity'];
             $is_avilable = $row['is_avilable'];
             $has_id = base64_encode($id);
+            echo "<tr>
+                    <td>$id </td>
+                    <td>$name</td>
+                    <td>$manufacture_date</td>
+                    <td>$expied_date </td> 
+                    <td>$form </td>
+                    <td>$strength</td>
+                    <td>$price</td>
+                    <td>$quantity</td>
+                    <td>$is_avilable</td>
+                    <td> <a href='../src/pharmacy.php?viewDrugdetail=$has_id' class='btn btn-primary btn-sm'>view detail</a></td>    
+                </tr>";
+        }
+    }
+    function viewDrugdetail()
+    {
+        $hid = $_GET['viewDrugdetail'];
+        $id = base64_decode($hid);
+        $sql = "SELECT drug_info.name,drug_info.expire_date,drug_info.manufacture_date,drug_info.form,drug_info.strength,drug_info.price,drug_info.quantity,drug_info.is_avilable,drug_info.description,drug_img.id,drug_img.drug_id,drug_img.image_url from drug_info
+         INNER JOIN drug_img on drug_info.id=drug_img.drug_id WHERE drug_info.id=$id;";
+        $row = mysqli_fetch_array(mysqli_query($this->connect(), $sql));
+        return $row;
+    }
+    function viewDrugImages()
+    {
+        $hid = $_GET['viewDrugdetail'];
+        $id = base64_decode($hid);
+        $sql = "SELECT * FROM `drug_img` WHERE drug_id= $id;";
+        $result = mysqli_query($this->connect(), $sql);
+        $row = mysqli_fetch_assoc($result);
+        $image = $row['image_url'];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $image = $row['image_url'];
             echo "
-            <tr>
-                <td>" . $id . "</td>
-                <td>" . $name . "</td>
-                <td>" . $manufacture_date . "</td>
-                <td>" . $expied_date . "</td> 
-                <td>" . $form . "</td>
-                <td>" . $strength . "</td>
-                <td>" . $price . "</td>>
-                <td>" . $quantity . "</td>
-                <td>" . $is_avilable . "</td>
-                <td> <a href='admin.php?viewDrugdetail=" . $has_id . "' class='btn btn-primary btn-sm'>view detail</a></td>    
-           </tr>";
+            <div class='col-md-4 col-lg-3 col-sm-6 col'>
+                <div class='product-image-thumb'><img src='$image'alt='Product Image' class='img-fluid img-thumbnail'></div>
+            </div>";
         }
     }
 }

@@ -7,7 +7,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Drug List</h3>
                         </div>
-                        <div class="card-body table-responsive " style="height: 400px;">
+                        <div class="card-body table-responsive p-0" style="height: 450px;">
                             <table class="table table-head-fixed text-nowrap">
                                 <thead>
                                     <tr>
@@ -24,7 +24,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $pharma->viewDrug() ?>
+                                    <?php
+                                    $pharma->viewDrug()
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
