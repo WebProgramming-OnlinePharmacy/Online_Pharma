@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body register-card-body">
                         <form method="POST">
-                            <p class="login-box-msg input-group">Register a new User</p>
+                            <p class="login-box-msg input-group">Register a new Pharmacy</p>
                             <div class="input-group mb-3">
                                 <label class="input-group">Pharmacy name</label>
                                 <input type="text" name="name" class="form-control" placeholder="Pharmacy name" required>

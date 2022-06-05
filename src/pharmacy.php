@@ -1,5 +1,9 @@
 <?php
 session_start();
+<<<<<<< HEAD
+=======
+var_dump(__DIR__);
+>>>>>>> 6bf475cd67485313515e623e8b74737c559ea2e8
 require __DIR__ . '/vendor/autoload.php';
 
 use App\Controller\Account;
@@ -43,10 +47,14 @@ if (isset($_POST['addDrug'])) {
 <body class="hold-transition  layout-fixed ">
     <div class="wrapper">
         <?php
+        
         if ($_SESSION['is_approved']) {
             include './includes/pharmacyleft.php';
             include './includes/pharmacytop.php';
-        } else {
+        } else if( $pharma->checkApprove($_SESSION['accid'])) {
+            include './includes/pharmacytopregistration.php';
+           include './includes/wait-until-approve.php';
+        }else{
             include './includes/pharmacytopregistration.php';
             include './includes/pharmacyleftRegister.php';
         }
@@ -66,10 +74,15 @@ if (isset($_POST['addDrug'])) {
             if (isset($_GET['expiredDrug'])) {
                 include './view/expiredDrug.php';
             }
+<<<<<<< HEAD
             if (isset($_GET['viewDrugdetail'])) {
                 include './view/viewDrugdetail.php';
             }
         } else {
+=======
+        } 
+        else {
+>>>>>>> 6bf475cd67485313515e623e8b74737c559ea2e8
             include './includes/pharmacybody.php';
         }
         ?>

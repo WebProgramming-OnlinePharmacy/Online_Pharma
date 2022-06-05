@@ -1,5 +1,9 @@
 <?php
 session_start();
+<<<<<<< HEAD
+=======
+var_dump(__DIR__);
+>>>>>>> 6bf475cd67485313515e623e8b74737c559ea2e8
 require __DIR__ . '/vendor/autoload.php';
 
 use App\Controller\Account;

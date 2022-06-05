@@ -13,14 +13,15 @@ class Pharmacy extends Database
         $is_deleted = 0;
         $created_at = date('Y-m-d H:i:s');
         $updated_at = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO `pharmacy_info`(`id`, `acc_id`, `Pharmacy_Name`, `Loocation`, `phone`, `is_deleted`, `Created_at`, `Updated_at`) VALUES ('','$acc_id','$pharmacy_name','$location','$phone','$is_deleted','$created_at','$updated_at')";
+        $sql = "INSERT INTO `pharmacy_info`(`acc_id`, `Pharmacy_Name`, `Loocation`, `phone`, `is_deleted`, `Created_at`, `Updated_at`) 
+        VALUES ('$acc_id','$pharmacy_name','$location','$phone','$is_deleted','$created_at','$updated_at')";
         $sql1 = "SELECT * FROM pharmacy_info WHERE phone= '$phone' AND is_deleted=0";
         if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
             if (mysqli_query($this->connect(), $sql)) {
                 echo "<script>alert('Added successfully')</script>";
-                echo "<script>window.open('../src/index.php')</script>";
                 return true;
             } else {
+                echo mysqli_error($this->connect(),$sql);
                 echo "<script>alert('registration failed')</script>";
             }
         } else {
@@ -185,4 +186,14 @@ class Pharmacy extends Database
             </div>";
         }
     }
+    function checkApprove($id){
+        $sql2 = "SELECT * FROM `pharmacy_info` WHERE acc_id = $id";
+        $result2 = mysqli_query($this->connect(), $sql2);
+        if(mysqli_num_rows($result2)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
