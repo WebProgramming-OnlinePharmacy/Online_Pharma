@@ -129,7 +129,7 @@ class Pharmacy extends Database
                     echo "<script>window.open('../src/pharmacy.php')</script>";
                 }
             }
-        }
+        }  
     }
     function viewDrug()
     {
@@ -171,7 +171,7 @@ class Pharmacy extends Database
         return $row;
     }
     function viewDrugImages()
-    {
+    {$updated_at = date('Y-m-d H:i:s');;
         $hid = $_GET['viewDrugdetail'];
         $id = base64_decode($hid);
         $sql = "SELECT * FROM `drug_img` WHERE drug_id= $id;";
@@ -195,5 +195,36 @@ class Pharmacy extends Database
             return false;
         }
     }
+      // pharma info
+      function pharmaInfo($id)
+      {
+          $sql = "SELECT * FROM pharmacy_info WHERE acc_id=$id";
+          $result = mysqli_query($this->connect(), $sql);
+          if ($result) {
+              $row = mysqli_fetch_assoc($result);
+              return $row;
+          }
+      }
+      //update pharma info
+      function updatePharmaInfo($name, $location, $phone){
+            $id = $_SESSION['pharmacy_id'];
+            $name = $this->myencode($name);
+            $location = $this->myencode($location);
+            $phone = $this->myencode($phone);
+            $updated_at = date('Y-m-d H:i:s');
+            $sql = "UPDATE `pharmacy_info` SET `Pharmacy_Name`='$name',`Loocation`='$location',`phone`='$phone',`Updated_at`='$updated_at' WHERE `id`='$id'";
+            $sql1 = "SELECT * FROM pharmacy_info WHERE phone= '$phone' AND is_deleted=0";
+            if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
+                if (mysqli_query($this->connect(), $sql)) {
+                    echo "<script>alert('Updated successfully')</script>";
+                    return true;
+                } else {
+                    echo mysqli_error($this->connect(),$sql);
+                    echo "<script>alert('registration failed')</script>";
+                }
+            } else {
+                echo "<script>alert('phone nummber already exists')</script>";
+            }  
+      }
 
 }

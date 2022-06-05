@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pharmacy.php?update-account-pharma" class="nav-link active">
+                <a href="pharmacy.php?update-pharma-info" class="nav-link active">
                     <i class="fas fa-edit"></i>
                     <p>
                         Update Pharmacy Info
