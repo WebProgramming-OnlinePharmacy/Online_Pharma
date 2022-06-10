@@ -105,35 +105,40 @@ class Admin extends Database
         return false;
     }
     // count active pharmacy
-    function countActivePharmacy(){
+    function countActivePharmacy()
+    {
         $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 1 AND is_deleted = 0";
         $result = mysqli_query($this->connect(), $sql);
         $count = mysqli_num_rows($result);
         return $count;
     }
     // count pending pharmacy
-    function countPendingPharmacy(){
+    function countPendingPharmacy()
+    {
         $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 0 AND is_deleted = 0";
         $result = mysqli_query($this->connect(), $sql);
         $count = mysqli_num_rows($result);
         return $count;
     }
     // count deleted pharmacy
-    function countDeletedPharmacy(){
+    function countDeletedPharmacy()
+    {
         $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 1 AND is_deleted = 1";
         $result = mysqli_query($this->connect(), $sql);
         $count = mysqli_num_rows($result);
         return $count;
     }
     // count all users
-    function countAllUsers(){
+    function countAllUsers()
+    {
         $sql = "SELECT * FROM account WHERE is_pharmacy = 0 AND is_deleted = 0";
         $result = mysqli_query($this->connect(), $sql);
         $count = mysqli_num_rows($result);
         return $count;
     }
     // update admin account
-    function updateAdminAccount($username,$email,$phone, $password, $fName, $mName, $lName){
+    function updateAdminAccount($username, $email, $phone, $password, $fName, $mName, $lName)
+    {
         $id = $_SESSION['accid'];
         $username = $this->myencode($username);
         $email = $this->myencode($email);
@@ -144,15 +149,19 @@ class Admin extends Database
         $password = md5($this->myencode($password));
         $updated_at = date('Y-m-d H:i:s');
         $sql = "UPDATE `account` SET `username`='$username',`email`='$email', `pasword`='$password',`updated_at`='$updated_at' WHERE `id`=$id";
+        $sql2 = "SELECT * FROM account WHERE username= '$username'";
         $sql4 = "UPDATE `admin` SET `F_name`='$fName',`M_name`='$mName',`L_name`='$lName',`Phone`='$phone',`updated_at`='$updated_at' WHERE `acc_id`=$id";
+            if (mysqli_num_rows(mysqli_query($this->connect(), $sql2)) == 0) {
                 if (mysqli_query($this->connect(), $sql) && mysqli_query($this->connect(), $sql4)) {
-                            return 1;
-                        }
+                    return 1;
+            }
             return 2;
-        
+        }
+        return 3;
     }
     // admin info 
-    function adminInfo($id){
+    function adminInfo($id)
+    {
         $sql = "SELECT * FROM `admin` WHERE `acc_id`=$id";
         $result = mysqli_query($this->connect(), $sql);
         if ($result) {
@@ -206,5 +215,4 @@ class Admin extends Database
         }
         return 6;
     }
-   
 }

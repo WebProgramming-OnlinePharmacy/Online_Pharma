@@ -34,10 +34,10 @@ if (isset($_POST['addnewadmin'])) {
                 echo "<script>alert('Admin Added successfully')</script>";
                 echo "<script>window.location.replace('./admin.php?addadmin')</script>";
             } elseif ($result == 2) {
-                echo "<script>alert('some thing went wrong 2')</script>";
+                echo "<script>alert('username already exist 2')</script>";
                 echo "<script>window.location.replace('./admin.php?addadmin')</script>";
             } elseif ($result == 3) {
-                echo "<script>alert('some thing went wrong 3')</script>";
+                echo "<script>alert('not Updated')</script>";
                 echo "<script>window.location.replace('./admin.php?addadmin')</script>";
             } else {
                 echo "<script>alert('some thing went wrong')</script>";
