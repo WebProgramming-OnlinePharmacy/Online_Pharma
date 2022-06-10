@@ -9,23 +9,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Drug Name</label>
-                                    <input type="text" name="drug_name" class="form-control" placeholder="First Name">
+                                    <input type="text" name="drug_name" class="form-control" placeholder="First Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Manufacture Date</label>
-                                    <input type="date" name="manfacture_date" class="form-control" placeholder="Last Name">
+                                    <input type="date" name="manfacture_date" class="form-control" placeholder="Last Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Expire Date</label>
-                                    <input type="date" name="expire_date" class="form-control" placeholder="Last Name">
+                                    <input type="date" name="expire_date" class="form-control" placeholder="Last Name" required>
                                 </div>
                                 <div class="form-group">
                                     <label>strength</label>
-                                    <input type="number" name="strength" class="form-control" placeholder="Age">
+                                    <input type="number" name="strength" class="form-control" placeholder="Age" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Form</label>
-                                    <select class="form-control" name="form" data-placeholder="Sex" style="width: 100%;">
+                                    <select class="form-control" name="form" data-placeholder="Sex" style="width: 100%;" required>
                                         <option>Male</option>
                                         <option>Female</option>
                                     </select>
@@ -35,21 +35,21 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input type="number" name="price" class="form-control <?php if (isset($username_err)) echo 'is-invalid'; ?>" placeholder="Username">
+                                    <input type="number" name="price" class="form-control" placeholder="Username" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" class="form-control <?php if (isset($email_err)) echo 'is-invalid'; ?>" placeholder="quantitiy">
+                                    <input type="number" name="quantity" class="form-control" placeholder="quantitiy" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea class="form-control" name="description" rows="4" placeholder="Enter ..."></textarea>
+                                    <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Images</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="image[]" class="custom-file-input" multiple>
+                                            <input type="file" name="image[]" class="custom-file-input" multiple required>
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>

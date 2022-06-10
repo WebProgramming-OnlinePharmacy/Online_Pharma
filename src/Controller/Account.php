@@ -37,17 +37,15 @@ class Account extends Database
         if (mysqli_num_rows(mysqli_query($this->connect(), $sql2)) == 0) {
             if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
                 if (mysqli_query($this->connect(), $sql)) {
-                    echo "<script>alert('Added successfully')</script>";
-                    echo "<script>window.open('../src/index.php')</script>";
-                    return true;
+                    return 0;
                 } else {
-                    echo "<script>alert('InsertionErr')</script>";
+                    return 1;
                 }
             } else {
-                echo "<script>alert('emailErr')</script>";
+                return 2;
             }
         } else {
-            echo "<script>alert('usernameErr')</script>";
+            return 3;
         }
     }
 

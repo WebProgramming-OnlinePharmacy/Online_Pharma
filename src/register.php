@@ -14,13 +14,31 @@ if (isset($_POST['registerAccount'])) {
     $role = $_POST['role'];
     if ($password === $confirmpassword) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $account->register($username, $email, $password, $role);
-            header("Location: ./index.php");
+            $registerAccount = $account->register($username, $email, $password, $role);
+            if ($registerAccount == 0) {
+                echo '<script>alert("Account Register successfully")</script>';
+                echo '<script>window.location.href = "./login.php";</script>';
+            } elseif ($registerAccount == 1) {
+                echo '<div class="alert alert-danger">
+                <strong>Error!</strong> Email is not valid.
+                </div>';
+                $erroremail = "email";
+            } elseif ($registerAccount == 2) {
+                echo '<div class="alert alert-danger">
+                <strong>Error!</strong> Email already exists.
+                </div>';
+                $erroremail = "email";
+            } elseif ($registerAccount == 3) {
+                echo '<div class="alert alert-danger">
+                <strong>Error!</strong> Username already exists.
+                </div>';
+                $errorusername = "username";
+            }
         } else {
-            echo "email validation Err";
+            $erroremail = "email";
         }
     } else {
-        echo "password confirmation Err";
+        $errorpass = "password";
     }
 }
 ?>
@@ -41,7 +59,7 @@ if (isset($_POST['registerAccount'])) {
 
                 <form method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                        <input type="text" class="form-control <?php if (isset($errorusername)) echo 'is-invalid'; ?>" name="username" placeholder="Username" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -49,7 +67,7 @@ if (isset($_POST['registerAccount'])) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control <?php if (isset($erroremail)) echo 'is-invalid'; ?>" name="email" placeholder="Email" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -57,7 +75,7 @@ if (isset($_POST['registerAccount'])) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
+                        <input type="password" class="form-control <?php if (isset($errorpass)) echo 'is-invalid'; ?>" name="password" placeholder="Enter your password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -65,7 +83,7 @@ if (isset($_POST['registerAccount'])) {
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="confirmpassword" placeholder="Retype your password" required>
+                        <input type="password" class="form-control <?php if (isset($errorpass)) echo 'is-invalid'; ?>" name="confirmpassword" placeholder="Retype your password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -78,21 +96,9 @@ if (isset($_POST['registerAccount'])) {
                             <option value="pharmacy">Pharmacy</option>
                         </select>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block" name="registerAccount">Register</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
+                    <a href="./login.php" class="text-center float-left mr-4">I already have a membership</a>
+                    <button type="submit" class=" btn btn-primary btn-md float-left" name="registerAccount">Register</button>
                 </form>
-
-
-
-                <a href="./login.php" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div><!-- /.card -->
