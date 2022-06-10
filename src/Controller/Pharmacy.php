@@ -21,7 +21,7 @@ class Pharmacy extends Database
                 echo "<script>alert('Added successfully')</script>";
                 return true;
             } else {
-                echo mysqli_error($this->connect(),$sql);
+                echo mysqli_error($this->connect(), $sql);
                 echo "<script>alert('registration failed')</script>";
             }
         } else {
@@ -65,7 +65,7 @@ class Pharmacy extends Database
                 if ($file_error === 0) {
                     if ($file_size <= 2097152) {
                         $file_name_new = time() . '_' . uniqid('', true) . '.' . $file_ext;
-                        $file_destination = 'images/' . $file_name_new;
+                        $file_destination = './images/' . $file_name_new;
                         move_uploaded_file($file_tmp, $file_destination);
                         if ($this->addImage($id, $file_destination)) {
                             $error = 0;
@@ -114,19 +114,14 @@ class Pharmacy extends Database
                 $id = $row['id'];
                 if ($this->imageupload($images, $id) == 0) {
                     echo "<script>alert('Added successfully')</script>";
-                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 } elseif ($this->imageupload($images, $id) == 1) {
                     echo "<script>alert('error in uploading')</script>";
-                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 } elseif ($this->imageupload($images, $id) == 2) {
                     echo "<script>alert('file size is too big')</script>";
-                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 } elseif ($this->imageupload($images, $id) == 3) {
                     echo "<script>alert('error in uploading')</script>";
-                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 } elseif ($this->imageupload($images, $id) == 4) {
                     echo "<script>alert('file type is not allowed')</script>";
-                    echo "<script>window.open('../src/pharmacy.php')</script>";
                 }
             }
         }
@@ -172,6 +167,7 @@ class Pharmacy extends Database
     }
     function viewDrugImages()
     {
+        $updated_at = date('Y-m-d H:i:s');;
         $hid = $_GET['viewDrugdetail'];
         $id = base64_decode($hid);
         $sql = "SELECT * FROM `drug_img` WHERE drug_id= $id;";
@@ -186,14 +182,46 @@ class Pharmacy extends Database
             </div>";
         }
     }
-    function checkApprove($id){
+    function checkApprove($id)
+    {
         $sql2 = "SELECT * FROM `pharmacy_info` WHERE acc_id = $id";
         $result2 = mysqli_query($this->connect(), $sql2);
-        if(mysqli_num_rows($result2)>0){
+        if (mysqli_num_rows($result2) > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
+    // pharma info
+    function pharmaInfo($id)
+    {
+        $sql = "SELECT * FROM pharmacy_info WHERE acc_id=$id";
+        $result = mysqli_query($this->connect(), $sql);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+    }
+    //update pharma info
+    function updatePharmaInfo($name, $location, $phone)
+    {
+        $id = $_SESSION['pharmacy_id'];
+        $name = $this->myencode($name);
+        $location = $this->myencode($location);
+        $phone = $this->myencode($phone);
+        $updated_at = date('Y-m-d H:i:s');
+        $sql = "UPDATE `pharmacy_info` SET `Pharmacy_Name`='$name',`Loocation`='$location',`phone`='$phone',`Updated_at`='$updated_at' WHERE `id`='$id'";
+        $sql1 = "SELECT * FROM pharmacy_info WHERE phone= '$phone' AND is_deleted=0";
+        if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
+            if (mysqli_query($this->connect(), $sql)) {
+                echo "<script>alert('Updated successfully')</script>";
+                return true;
+            } else {
+                echo mysqli_error($this->connect(), $sql);
+                echo "<script>alert('registration failed')</script>";
+            }
+        } else {
+            echo "<script>alert('phone nummber already exists')</script>";
+        }
+    }
 }

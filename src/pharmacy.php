@@ -1,7 +1,6 @@
 <?php
 session_start();
 require __DIR__ . '/vendor/autoload.php';
-
 use App\Controller\Account;
 use App\Controller\Pharmacy;
 use App\Controller\Admin;
@@ -16,12 +15,40 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != "pharmacy") {
 if (isset($_GET['logout'])) {
     $acc->logout();
 }
+if (isset($_POST['updateAccount'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmpassword = $_POST['confirmpassword'];
+    if ($password === $confirmpassword) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if($acc->updateAccount($username, $email, $password)){
+                echo "<script>window.location.replace('./pharmacy.php')</script>";
+            }
+        } else {
+            echo "email validation Err";
+        }
+    } else {
+        echo "password confirmation Err";
+    }   
+}
 if (isset($_POST['addpharmacyinfo'])) {
     $pharmacyname = $_POST['name'];
     $phone = $_POST['Phonenumber'];
     $location = $_POST['location'];
     $pharma->register($pharmacyname, $location, $phone);
 }
+
+ if(isset($_POST['updatePharmaInfo'])){
+    $pharmacyname = $_POST['name'];
+    $phone = $_POST['Phonenumber'];
+    $location = $_POST['location'];
+    $res=$pharma->updatePharmaInfo($pharmacyname, $location, $phone);
+    if($res){
+       echo "<script>window.location.replace('./pharmacy.php')</script>";
+    }
+ }
+
 if (isset($_POST['addDrug'])) {
     $drug_name = $_POST['drug_name'];
     $manfacture_date = $_POST['manfacture_date'];
@@ -56,10 +83,16 @@ if (isset($_POST['addDrug'])) {
         }
         if (
             isset($_GET['addpharmacyinfo']) || isset($_GET['addDrug']) || isset($_GET['viewDrug'])
-            || isset($_GET['expiredDrug']) || isset($_GET['viewDrugdetail'])
+            || isset($_GET['expiredDrug']) || isset($_GET['update-pharma-info']) || isset($_GET['viewDrugdetail']) || isset($_GET['update-account-pharma'] )
         ) {
             if (isset($_GET['addpharmacyinfo'])) {
                 include './view/addpharmacyInfo.php';
+            }
+            if (isset($_GET['update-pharma-info'])) {
+                include './view/update-pharma-info.php';
+            }
+            if (isset($_GET['update-account-pharma'])) {
+                include './view/update-account.php';
             }
             if (isset($_GET['addDrug'])) {
                 include './view/addDrug.php';

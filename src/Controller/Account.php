@@ -86,7 +86,44 @@ class Account extends Database
         }
         return false;
     }
+    //Account info
+    function accountInfo($id)
+    {
+        $sql = "SELECT * FROM account WHERE id=$id";
+        $result = mysqli_query($this->connect(), $sql);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+    }
+  
 
+// update account
+    function updateAccount($username, $email, $password)
+    {
+        $username = $this->myencode($username);
+        $email = $this->myencode($email);
+        $password = md5($this->myencode($password));
+        $date = date('Y-m-d H:i:s');
+        $sql = "UPDATE `account` SET `username`='$username',`email`='$email',`pasword`='$password', `updated_at`= '$date' WHERE id=" . $_SESSION['accid'];
+        $sql1 = "SELECT * FROM `account` WHERE `username`='$username'";
+       $sql2= "SELECT * FROM `account` WHERE `email`='$email'";
+       if (mysqli_num_rows(mysqli_query($this->connect(), $sql2)) == 0) {
+        if (mysqli_num_rows(mysqli_query($this->connect(), $sql1)) == 0) {
+            if (mysqli_query($this->connect(), $sql)) {
+                echo "<script>alert('Updated successfully')</script>";
+                return true;
+            } else {
+                echo "<script>alert('InsertionErr')</script>";
+            }
+        } else {
+            echo "<script>alert('Email in Use')</script>";
+        }
+    } else {
+        echo "<script>alert('Username In Use')</script>";
+    }
+        
+    }
 
     public function logout()
     {

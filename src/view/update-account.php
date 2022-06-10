@@ -1,5 +1,9 @@
+
 <div class="content-wrapper pt-5  vh-100">
     <!-- Main content -->
+    <?php
+    $row = $acc->accountInfo($_SESSION['accid'])
+    ?>
     <section class="content mt-5">
 
         <div class="container-fluid">
@@ -7,35 +11,45 @@
                 <div class="card">
                     <div class="card-body register-card-body">
                         <form method="POST">
-                            <p class="login-box-msg input-group">Register a new Pharmacy</p>
+                            <p class="login-box-msg input-group">Update Your Account</p>
                             <div class="input-group mb-3">
-                                <label class="input-group">Pharmacy name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Pharmacy name" required>
+                                <label class="input-group">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="<?php echo $row['username']; ?>" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                     </div>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <label class="input-group">Location</label>
-                                <input type="text" name="location" class="form-control" placeholder="Location" required>
+                                <label class="input-group">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="<?php echo $row['email']; ?>" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                <label class="input-group">Phone number</label>
-                                <input type="text" name="Phonenumber" class="form-control" placeholder="Phone number" required>
+                                <label class="input-group">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" name="confirmpassword" placeholder="Retype your password" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <!-- /.col -->
                                 <div class="col-4">
-                                    <button name="addpharmacyinfo" type="submit" class="btn btn-primary btn-block">Register</button>
+                                    <button name="updateAccount" type="submit" class="btn btn-primary btn-block">Update</button>
                                 </div>
                                 <!-- /.col -->
                             </div>
