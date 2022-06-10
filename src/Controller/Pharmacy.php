@@ -218,7 +218,7 @@ class Pharmacy extends Database
                 return true;
             } else {
                 echo mysqli_error($this->connect(), $sql);
-                echo "<script>alert('registration failed')</script>";
+                echo "<script>alert('not updated')</script>";
             }
         } else {
             echo "<script>alert('phone nummber already exists')</script>";

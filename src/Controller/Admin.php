@@ -80,6 +80,7 @@ class Admin extends Database
             </tr>";
         }
     }
+    // approve pharmacy
     function approvePharmacy($id)
     {
         $updated_at = date('Y-m-d H:i:s');
@@ -131,6 +132,34 @@ class Admin extends Database
         $count = mysqli_num_rows($result);
         return $count;
     }
+    // update admin account
+    function updateAdminAccount($username,$email,$phone, $password, $fName, $mName, $lName){
+        $id = $_SESSION['accid'];
+        $username = $this->myencode($username);
+        $email = $this->myencode($email);
+        $fName = $this->myencode($fName);
+        $lName = $this->myencode($lName);
+        $mName = $this->myencode($mName);
+        $phone = $this->myencode($phone);
+        $password = md5($this->myencode($password));
+        $updated_at = date('Y-m-d H:i:s');
+        $sql = "UPDATE `account` SET `username`='$username',`email`='$email', `pasword`='$password',`updated_at`='$updated_at' WHERE `id`=$id";
+        $sql4 = "UPDATE `admin` SET `F_name`='$fName',`M_name`='$mName',`L_name`='$lName',`Phone`='$phone',`updated_at`='$updated_at' WHERE `acc_id`=$id";
+                if (mysqli_query($this->connect(), $sql) && mysqli_query($this->connect(), $sql4)) {
+                            return 1;
+                        }
+            return 2;
+        
+    }
+    // admin info 
+    function adminInfo($id){
+        $sql = "SELECT * FROM `admin` WHERE `acc_id`=$id";
+        $result = mysqli_query($this->connect(), $sql);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+    }
     function addAdmin($username, $email, $password, $fName, $mName, $lName, $age, $sex, $phone)
     {
         $username = $this->myencode($username);
@@ -177,4 +206,5 @@ class Admin extends Database
         }
         return 6;
     }
+   
 }

@@ -92,7 +92,7 @@ if (isset($_POST['addDrug'])) {
                 include './view/update-pharma-info.php';
             }
             if (isset($_GET['update-account-pharma'])) {
-                include './view/update-account.php';
+                include './view/update-pharma-account.php';
             }
             if (isset($_GET['addDrug'])) {
                 include './view/addDrug.php';

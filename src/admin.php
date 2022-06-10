@@ -39,16 +39,48 @@ if (isset($_POST['addnewadmin'])) {
             } elseif ($result == 3) {
                 echo "<script>alert('some thing went wrong 3')</script>";
                 echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            } else {
+                echo "<script>alert('some thing went wrong')</script>";
+                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+            }
+        } else {
+            $email_err = "invalid email address";
+        }
+    } else {
+        $password_err = "password confirmation";
+    }
+}
+if(isset($_POST['updateAdmin'])){
+    $username = $_POST['username'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $middle_name = $_POST['middle_name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    if ($password === $confirm_password) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $result = $admin->updateAdminAccount($username, $email, $phone, $password, $first_name, $middle_name, $last_name);
+            if ($result == 1) {
+                echo "<script>alert('updated successfully')</script>";
+                echo "<script>window.location.replace('./admin.php')</script>";
+            } elseif ($result == 2) {
+                echo "<script>alert('some thing went wrong 2')</script>";
+               echo "<script>window.location.replace('./admin.php?updateAdmin')</script>";
+            } elseif ($result == 3) {
+                echo "<script>alert('some thing went wrong 3')</script>";
+                echo "<script>window.location.replace('./admin.php?updateAdmin')</script>";
             } elseif ($result == 4) {
                 echo "<script>alert('some thing went wrong 4')</script>";
-                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+                echo "<script>window.location.replace('./admin.php?updateAdmin')</script>";
             } elseif ($result == 5) {
                 $email_err = "invalid email address";
             } elseif ($result == 6) {
                 $username_err = "invalid username";
             } else {
                 echo "<script>alert('some thing went wrong')</script>";
-                echo "<script>window.location.replace('./admin.php?addadmin')</script>";
+                echo "<script>window.location.replace('./admin.php?updateAdmin')</script>";
             }
         } else {
             $email_err = "invalid email address";
@@ -70,7 +102,7 @@ if (isset($_POST['addnewadmin'])) {
         include './includes/adminleft.php';
         if (
             isset($_GET['registeredPharmacylist']) || isset($_GET['viewPharmacydetail'])
-            || isset($_GET['addadmin']) || isset($_GET['viewpharmacy']) || isset($_GET['deletepharmacy'])
+            || isset($_GET['addadmin']) || isset($_GET['viewpharmacy']) || isset($_GET['updateAdmin']) || isset($_GET['deletepharmacy'])
             || isset($_GET['deletedpharmacylist'])
         ) {
             if (isset($_GET['registeredPharmacylist'])) {
@@ -78,6 +110,9 @@ if (isset($_POST['addnewadmin'])) {
             }
             if (isset($_GET['viewPharmacydetail'])) {
                 include './view/pharmacydetail.php';
+            }
+            if (isset($_GET['updateAdmin'])) {
+                include './view/update-admin-account.php';
             }
             if (isset($_GET['addadmin'])) {
                 include './view/addadmin.php';
