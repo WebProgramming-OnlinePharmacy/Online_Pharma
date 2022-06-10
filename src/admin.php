@@ -97,7 +97,7 @@ if (isset($_POST['addnewadmin'])) {
                 }
             }
         } else {
-            include './includes/adminbody.php';
+            include './view/admin-dashboard.php';
         }
         ?>
     </div>

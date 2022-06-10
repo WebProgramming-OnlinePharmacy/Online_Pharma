@@ -103,7 +103,34 @@ class Admin extends Database
         }
         return false;
     }
-
+    // count active pharmacy
+    function countActivePharmacy(){
+        $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 1 AND is_deleted = 0";
+        $result = mysqli_query($this->connect(), $sql);
+        $count = mysqli_num_rows($result);
+        return $count;
+    }
+    // count pending pharmacy
+    function countPendingPharmacy(){
+        $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 0 AND is_deleted = 0";
+        $result = mysqli_query($this->connect(), $sql);
+        $count = mysqli_num_rows($result);
+        return $count;
+    }
+    // count deleted pharmacy
+    function countDeletedPharmacy(){
+        $sql = "SELECT * FROM account WHERE is_pharmacy = 1 AND is_approved = 1 AND is_deleted = 1";
+        $result = mysqli_query($this->connect(), $sql);
+        $count = mysqli_num_rows($result);
+        return $count;
+    }
+    // count all users
+    function countAllUsers(){
+        $sql = "SELECT * FROM account WHERE is_pharmacy = 0 AND is_deleted = 0";
+        $result = mysqli_query($this->connect(), $sql);
+        $count = mysqli_num_rows($result);
+        return $count;
+    }
     function addAdmin($username, $email, $password, $fName, $mName, $lName, $age, $sex, $phone)
     {
         $username = $this->myencode($username);

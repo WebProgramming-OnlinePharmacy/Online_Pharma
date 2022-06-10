@@ -2,7 +2,8 @@
     <!-- side -->
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <h2>Admin page</h2>
+            <h2><a href="admin.php">Admin page</a></h2>
+            
         </div>
         <!-- side bar menu -->
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
