@@ -8,6 +8,14 @@
         </div>
         <!-- side bar menu -->
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="pharmacy.php" class="nav-link active">
+                    <i class="fas fa-edit"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
             <li class="nav-item menu-open">
                 <a href="#" class="nav-link active">
                     <i class="fas fa-tasks"></i>

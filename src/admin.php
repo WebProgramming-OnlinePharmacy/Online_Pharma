@@ -132,7 +132,7 @@ if(isset($_POST['updateAdmin'])){
                 }
             }
         } else {
-            include './view/admin-dashboard.php';
+            include './includes/adminbody.php';
         }
         ?>
     </div>
