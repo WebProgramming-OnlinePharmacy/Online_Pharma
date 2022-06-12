@@ -1,29 +1,29 @@
-<nav class="navbar navbar-expand navbar-primary navbar-dark pt-3 pb-2 fixed-top">
+<nav class="navbar navbar-expand navbar-primary navbar-dark pt-3 pb-2 fixed-top " style="height: 100px;">
     <!-- Left navbar links -->
     <div class="form-inline">
-        <form action="">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="text" placeholder="Search" aria-label="Search">
+        <h2>Online pharmacy</h2>
+    </div>
+    <div class="offset-sm-1 w-50">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="input-group vh-0">
+                <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here">
                 <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
+                    <button type="submit" class="btn btn-md btn-default">
+                        <i class="fa fa-search"></i>
                     </button>
                 </div>
             </div>
         </form>
-
     </div>
-
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block pr-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
-                chat
-            </button>
+            <a href="./user.php?Chat" class="nav-link">Chat</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block pr-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">
-                profile
-            </button>
+            <a href="./user.php?profile" class="nav-link">Profile</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block pr-2">
+            <a href="./user.php?logout" class="nav-link">Logout</a>
         </li>
     </ul>
 </nav>

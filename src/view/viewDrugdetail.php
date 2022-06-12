@@ -1,6 +1,9 @@
 <div class="content-wrapper pt-5 pb-5">
 
-    <?php $row = $pharma->viewDrugdetail() ?>
+    <?php
+    $hid = $_GET['viewDrugdetail'];
+    $id = base64_decode($hid);
+    $row = $pharma->viewDrugdetail($id); ?>
 
     <section class="content-header pt-5">
         <div class="container-fluid">
@@ -56,9 +59,10 @@
             </div>
         </div>
         <div class="diplay-flex pr-5">
-            <form method="POST">
-                <input type="submit" name="approvenewpharmacy" value="Approve" class="btn btn-primary float-right">
-            </form>
+            <?php
+            $hashacc_id = base64_encode($row['id']);
+            echo "<a href='pharmacy.php?updateDrug=" . $hashacc_id . "' class='btn btn-primary float-right btn-md'>Update</a>";
+            ?>
         </div>
     </section>
 </div>

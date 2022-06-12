@@ -156,18 +156,15 @@ class Pharmacy extends Database
                 </tr>";
         }
     }
-    function viewDrugdetail()
+    function viewDrugdetail($id)
     {
-        $hid = $_GET['viewDrugdetail'];
-        $id = base64_decode($hid);
-        $sql = "SELECT drug_info.name,drug_info.expire_date,drug_info.manufacture_date,drug_info.form,drug_info.strength,drug_info.price,drug_info.quantity,drug_info.is_avilable,drug_info.description,drug_img.id,drug_img.drug_id,drug_img.image_url from drug_info
+        $sql = "SELECT drug_info.id,drug_info.name,drug_info.expire_date,drug_info.manufacture_date,drug_info.form,drug_info.strength,drug_info.price,drug_info.quantity,drug_info.is_avilable,drug_info.description,drug_img.image_url from drug_info
          INNER JOIN drug_img on drug_info.id=drug_img.drug_id WHERE drug_info.id=$id;";
         $row = mysqli_fetch_array(mysqli_query($this->connect(), $sql));
         return $row;
     }
     function viewDrugImages()
     {
-        $updated_at = date('Y-m-d H:i:s');;
         $hid = $_GET['viewDrugdetail'];
         $id = base64_decode($hid);
         $sql = "SELECT * FROM `drug_img` WHERE drug_id= $id;";
@@ -223,5 +220,33 @@ class Pharmacy extends Database
         } else {
             echo "<script>alert('phone nummber already exists')</script>";
         }
+    }
+
+    function drugInformation($id)
+    {
+        $sql = "SELECT * FROM `drug_info` WHERE `id`= $id ";
+        $result = mysqli_query($this->connect(), $sql);
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return [];
+    }
+    function updateDrugInformation($id, $name, $manufacture_date, $expied_date, $strength, $form, $price, $quantity, $description)
+    {
+        $name = $this->myencode($name);
+        $manufacture_date = $this->myencode($manufacture_date);
+        $expied_date = $this->myencode($expied_date);
+        $strength = $this->myencode($strength);
+        $form = $this->myencode($form);
+        $price = $this->myencode($price);
+        $quantity = $this->myencode($quantity);
+        $description = $this->myencode($description);
+        $updated_at = date('Y-m-d H:i:s');
+        $sql = "UPDATE `drug_info` SET `name`='$name',`description`='$description',`expire_date`='$expied_date',`manufacture_date`='$manufacture_date',`form`='$form',`strength`='$strength',`price`='$price',`quantity`='$quantity',`Updated_at`='$updated_at' WHERE `id`= $id ";
+        $result = mysqli_query($this->connect(), $sql);
+        if ($row = mysqli_fetch_assoc($result)) {
+            return true;
+        }
+        return false;
     }
 }

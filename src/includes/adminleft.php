@@ -7,8 +7,8 @@
         </div>
         <!-- side bar menu -->
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-                <a href="admin.php?addadmin" class="nav-link">
+            <li class="nav-item">
+                <a href="admin.php" class="nav-link">
                     <i class=" fas fa-edit"></i>
                     <p>
                         Dashboard
@@ -49,9 +49,8 @@
             </li>
             <li class="nav-item">
                 <a href="admin.php?updateAdmin" class="nav-link <?php if (isset($_GET['updateAdmin'])) {
-                                                                                    echo 'active';
-                                                                                } ?> "
-                >
+                                                                    echo 'active';
+                                                                } ?> ">
                     <i class="fas fa-edit"></i>
                     <p>
                         Update Account
